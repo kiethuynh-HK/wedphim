@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <th:block th:replace="layout :: link-css"></th:block>
+    <title>Add Phòng</title>
+</head>
+<body>
+<th:block th:replace="layout :: header"></th:block>
+<div class="container">
+    <h1>Add Phòng</h1>
+    <form th:action="@{/phong/add}" th:object="${phong}" method="post">
+
+        <div class="col-6 mb-3">
+            <label class="form-label" for="name">name:</label>
+            <input class="form-control" type="text" th:field="*{name}" id="name">
+            <span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors ="*{name}"></span>
+        </div>
+        <div class="col-6 mb-3">
+            <label class="form-label" for="capacity">capacity:</label>
+            <input class="form-control" type="text" th:field="*{capacity}" id="capacity">
+        </div>
+        <div class="col-6 mb-3">
+            <label class="form-label" for="totalArea">totalArea:</label>
+            <input class="form-control" type="text" th:field="*{price}" id="totalArea">
+            <span class="text-danger" th:if="${#fields.hasErrors('totalArea')}" th:errors ="*{totalArea}"></span>
+        </div>
+        <div class="col-6 mb-3">
+            <label class="form-label" for="chinhanh">Chi Nhánh:</label>
+            <select class="form-control" name="chinhanh.id" id="chinhanh">
+                <option value="">-- Select Chi Nhánh --</option>
+                <option th:each="chinhanh : ${chinhanhs}" th:value="${chinhanh.id}" th:text="${chinhanh.name}"></option>
+            </select>
+            <span class="text-danger" th:if="${#fields.hasErrors('chinhanh')}" th:errors ="*{chinhanh}"></span>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Save">
+    </form>
+    <br>
+    <a th:href="@{/phong}">Back to List</a>
+</div>
+<th:block th:replace="layout :: footer"></th:block>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thyme leaf-extras-springsecurity6" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Phòng List</title>
+    <th:block th:replace="layout :: link-css"></th:block>
+</head>
+<body>
+<th:block th:replace="layout :: header"></th:block>
+<div class="container">
+    <h1 th:text=${name}></h1>
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>capacity</th>
+            <th>totalArea</th>
+            <th>chinhanh</th>
+            <!--            <th>Action</th>-->
+            <th sec:authorize="hasAnyAuthority ('ADMIN')">Action</th>
+        </tr>
+        <tr th:each="book : ${phong}">
+            <td th:text="${phong.id}"></td>
+            <td th:text="${phong.name}"></td>
+            <td th:text="${phong.capacity}"></td>
+            <td th:text="${phong.totalArea}"></td>
+            <td th:text="${phong.chinhanh.name}"></td>
+            <td sec:authorize="hasAnyAuthority ('ADMIN')">
+
+                <a th:href="@{/phongg/edit/{id}(id=${phong.id})}">Edit</a>
+                <form th:action="@{/phongg/delete/{id}(id=${phong.id})}" method="post" onsubmit="return confirm('Are you sure?')">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
