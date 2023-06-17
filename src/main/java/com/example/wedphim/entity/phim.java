@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.Set;
 
 @Data
 @Entity
@@ -32,15 +33,17 @@ public class phim {
     @Column(name = "rated")
     @NotNull
     private float rated;
-    @ManyToOne
-    @JoinColumn(name = "idLoaiPhim")
-    @ValidCategoryId
-    private loaiPhim loaiphim;
-    @ManyToOne
-    @JoinColumn(name = "idNgonNgu")
-    @ValidNgonNguId
-    private ngonNgu ngonngu;
     @Column(name = "trailer")
     @NotNull
     private String trailer;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="LoaiPhimId")
+    private loaiPhim loaiPhims;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="NgonNguId")
+    private ngonNgu ngonNgus;
+    @OneToMany(mappedBy = "phim", cascade =CascadeType.ALL)
+    private Set<daoDienTrongPhim> daodien_tp;
+    @OneToMany(mappedBy = "phim", cascade =CascadeType.ALL)
+    private Set<dienVienTrongPhim> dienvien_tp;
 }
