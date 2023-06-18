@@ -28,8 +28,8 @@
             <td th:text="${phong.chinhanh.name}"></td>
             <td sec:authorize="hasAnyAuthority ('ADMIN')">
 
-                <a th:href="@{/phongg/edit/{id}(id=${phong.id})}">Edit</a>
-                <form th:action="@{/phongg/delete/{id}(id=${phong.id})}" method="post" onsubmit="return confirm('Are you sure?')">
+                <a th:href="@{/phong/edit/{id}(id=${phong.id})}">Edit</a>
+                <form th:action="@{/phong/delete/{id}(id=${phong.id})}" method="post" onsubmit="return confirm('Are you sure?')">
                     <button type="submit">Delete</button>
                 </form>
             </td>
