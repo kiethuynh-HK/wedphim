@@ -1,7 +1,8 @@
 package com.example.wedphim.service;
 
 
-import com.example.wedphim.controller.admin.entity.phong;
+
+import com.example.wedphim.entity.Phong;
 import com.example.wedphim.repository.IPhongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,17 +14,17 @@ public class PhongService {
     @Autowired
     private IPhongRepository iphongRepository;
 
-    public List<phong> getAllPhongs(){
+    public List<Phong> getAllPhongs(){
         return iphongRepository.findAll();
     }
-    public phong getPhongById(Long id){
-        Optional<phong> optional = iphongRepository.findById(id);
+    public Phong getPhongById(Long id){
+        Optional<Phong> optional = iphongRepository.findById(id);
         return optional.orElse(null);
     }
-    public void addPhong(phong phong){
+    public void addPhong(Phong phong){
         iphongRepository.save(phong);
     }
-    public void updatePhong(phong phong){
+    public void updatePhong(Phong phong){
         iphongRepository.save(phong);
     }
     public void deletePhong(Long id){
