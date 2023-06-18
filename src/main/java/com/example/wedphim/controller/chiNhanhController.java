@@ -1,6 +1,6 @@
 package com.example.wedphim.controller;
 
-import com.example.wedphim.entity.chiNhanh;
+import com.example.wedphim.controller.admin.entity.chiNhanh;
 import com.example.wedphim.service.chiNhanhService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

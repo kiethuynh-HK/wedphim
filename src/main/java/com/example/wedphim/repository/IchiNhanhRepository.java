@@ -1,6 +1,6 @@
 package com.example.wedphim.repository;
 
-import com.example.wedphim.entity.chiNhanh;
+import com.example.wedphim.controller.admin.entity.chiNhanh;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

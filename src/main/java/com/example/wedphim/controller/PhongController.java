@@ -1,14 +1,12 @@
 package com.example.wedphim.controller;
 
 
-import com.example.wedphim.entity.Phong;
-import com.example.wedphim.service.PhongService;
 
+import com.example.wedphim.controller.admin.entity.phong;
+import com.example.wedphim.service.PhongService;
 import com.example.wedphim.service.chiNhanhService;
 import jakarta.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,7 +26,7 @@ public class PhongController {
     @GetMapping
     public String showAllPhongs(Model model)
     {
-        List<Phong> phong = phongService.getAllPhongs();
+        List<phong> phong = phongService.getAllPhongs();
         model.addAttribute("phong",phong);
         model.addAttribute("name","phong");
         return "phongg/list";
@@ -37,25 +35,25 @@ public class PhongController {
 
     @GetMapping("/add")
     public String addPhongForm(Model model){
-        model.addAttribute("phong",new Phong());
+        model.addAttribute("phong",new phong());
         model.addAttribute("chinhanhs",chinhanhService.getAllchiNhanhs());
         return "phongg/add";
     }
 
 
     @PostMapping("/add")
-    public String addPhong(@Valid @ModelAttribute("phong") Phong phong , BindingResult bindingResult , Model model){
+    public String addPhong(@Valid @ModelAttribute("phong") phong Phong , BindingResult bindingResult , Model model){
         if(bindingResult.hasErrors())
         {
             model.addAttribute("chinhanhs",chinhanhService.getAllchiNhanhs());
             return "phongg/add";
         }
-        phongService.addPhong(phong);
+        phongService.addPhong(Phong);
         return "redirect:/phongg";
     }
     @GetMapping("/edit/{id}")
     public String editPhongForm(@PathVariable("id") long id, Model model){
-        Phong editPhong = phongService.getPhongById(id);
+        phong editPhong = phongService.getPhongById(id);
         if(editPhong != null){
             model.addAttribute("phong", editPhong);
             model.addAttribute("chinhanhs", chinhanhService.getAllchiNhanhs());
@@ -65,7 +63,7 @@ public class PhongController {
         }
     }
     @PostMapping("/edit")
-    public String editPhong(@Valid @ModelAttribute("phong")Phong updatePhong, BindingResult bindingResult, Model model ){
+    public String editPhong(@Valid @ModelAttribute("phong")phong updatePhong, BindingResult bindingResult, Model model ){
         if (bindingResult.hasErrors()){
             model.addAttribute("chinhanhs", chinhanhService.getAllchiNhanhs());
             return "phongg/edit";
